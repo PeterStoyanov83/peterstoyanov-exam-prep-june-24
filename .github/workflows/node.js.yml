@@ -26,5 +26,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: start the app
+        run: npm start
+
+      - name: Set execute permissions for Mocha
+        run: chmod +x ./node_modules/.bin/mocha
+
       - name: Run unit tests
         run: npm run test:unit
