@@ -1,3 +1,5 @@
+// 'grades-controller.js'
+
 function setup(app, grades) {
   app.get('/', function(req, res) {
     let model = {
@@ -34,7 +36,7 @@ function setup(app, grades) {
   app.post('/add-grade', function(req, res) {
     if (paramEmpty(req.body.subject) || paramEmpty(req.body.value)) {
       let model = {
-        title: "Add Grade", 
+        title: "Add Grade",
         errMsg: "Cannot add grade. Subject and value fields are required!"
       };
       res.render('add-grade', model);

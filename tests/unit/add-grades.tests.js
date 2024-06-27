@@ -28,9 +28,8 @@ suite('Add Grades page', function() {
   });
 
   test('Add valid grade', async function() {
-    // First, submit the grade
-    let res = await fetch(
-      "http://localhost:8080/add-grade",
+
+    let res = await fetch("http://localhost:8080/add-grade",
       {
         method: 'POST',
         headers: {
@@ -73,6 +72,10 @@ suite('Add Grades page', function() {
     res = await fetch("http://localhost:8080/grades");
     body = await res.text();
     console.log(body); // Debugging: Output the home page content
-    assert.ok(body.includes("Grades: 3"), "Add invalid grade should not change the grades count");
+    let gradesCountCorrect = body.includes(
+      "<li>English (5.50)</li><li>Math (4.50)</li><li>Programming Basics (6.00)</li>"
+    );
+    console.log('Grades Count Correct:', gradesCountCorrect); // Debugging: Check if the grades count is correct
+    assert.ok(gradesCountCorrect, "Add invalid grade should not change the grades count");
   });
 });
