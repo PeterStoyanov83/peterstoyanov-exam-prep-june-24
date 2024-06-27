@@ -1,5 +1,3 @@
-// 'grades-controller.js'
-
 function setup(app, grades) {
   app.get('/', function(req, res) {
     let model = {
@@ -47,7 +45,13 @@ function setup(app, grades) {
       value: req.body.value
     };
     grades.push(grade);
-    res.redirect('/grades');
+    res.redirect('/my-grades');
+  });
+
+  // Add this route to clear grades
+  app.post('/clear-grades', function(req, res) {
+    grades.length = 0;
+    res.sendStatus(200);
   });
 }
 
