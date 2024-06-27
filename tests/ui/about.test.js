@@ -1,15 +1,23 @@
 const { test, expect } = require('@playwright/test');
 
 test('Check about page', async ({ page }) => {
-  await page.goto('http://localhost:8080/about');
-  const heading = await page.$('h6');
-  const text = await heading.textContent();
-  expect(text).toBe('About my grades ');
-});
+  await page.goto('http://localhost:8080/About');
 
+  // Check the heading
+  const heading = await page.$('h1');
+  const headingText = await heading.textContent();
+  expect(headingText.trim()).toBe('About');
+
+  // Check the paragraph text
+  const paragraph = await page.$('p');
+  const paragraphText = await paragraph.textContent();
+  expect(paragraphText.trim()).toBe('This is the Regular exam for Software Engineering and DevOps course @ SoftUni');
+});
 test('Check about page test', async ({ page }) => {
   await page.goto('http://localhost:8080/about');
-  const heading = await page.$('a');
-  const text = await heading.textContent();
-  expect(text).toBe('This is my gardes list');
+
+  // Check the paragraph text
+  const paragraph = await page.$('p');
+  const paragraphText = await paragraph.textContent();
+  expect(paragraphText.trim()).toBe('This is the Regular exam for Software Engineering and DevOps course @ SoftUni');
 });
