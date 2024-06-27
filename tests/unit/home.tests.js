@@ -2,8 +2,8 @@ const assert = require('assert');
 const fetch = require('node-fetch');
 
 suite('Home page', function() {
-  setup(async function() {
-    // Clear the grades before each test
+  teardown(async function() {
+    // Clear the grades after each test
     await fetch("http://localhost:8080/clear-grades", { method: 'POST' });
   });
 
