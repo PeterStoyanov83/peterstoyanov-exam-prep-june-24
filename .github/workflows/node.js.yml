@@ -27,7 +27,7 @@ jobs:
         run: npm install
 
       - name: start the app
-        run: npm start
+        run: npm start &
 
       - name: Set execute permissions for Mocha
         run: chmod +x ./node_modules/.bin/mocha
