@@ -28,8 +28,8 @@ suite('Add Grades page', function() {
   });
 
   test('Add valid grade', async function() {
-
-    let res = await fetch("http://localhost:8080/add-grade",
+    let res = await fetch(
+      "http://localhost:8080/add-grade",
       {
         method: 'POST',
         headers: {
@@ -39,19 +39,16 @@ suite('Add Grades page', function() {
       }
     );
 
-    // Then, fetch the updated grades list
-    res = await fetch("http://localhost:8080/grades");
+    res = await fetch("http://localhost:8080/my-grades");
     let body = await res.text();
     console.log(body); // Debugging: Output the page content after adding a grade
     let gradesReturned = body.includes(
       "<li>English (5.50)</li><li>Math (4.50)</li><li>Programming Basics (6.00)</li><li>Physics (3.90)</li>"
     );
-    console.log('Grades Returned:', gradesReturned); // Debugging: Check if the grades are returned
     assert.ok(gradesReturned, "Add grade failed");
   });
 
   test('Add invalid grade', async function() {
-    // First, submit the invalid grade
     let res = await fetch(
       "http://localhost:8080/add-grade",
       {
@@ -65,17 +62,14 @@ suite('Add Grades page', function() {
     let body = await res.text();
     console.log(body); // Debugging: Output the page content after attempting to add an invalid grade
     let errMsg = body.includes("Cannot add grade. Subject and value fields are required!");
-    console.log('Error Message Found:', errMsg); // Debugging: Check if the error message is found
     assert.ok(errMsg, "Add invalid grade should display an error message");
 
-    // Then, fetch the grades list to ensure it has not changed
-    res = await fetch("http://localhost:8080/grades");
+    res = await fetch("http://localhost:8080/my-grades");
     body = await res.text();
-    console.log(body); // Debugging: Output the home page content
+    console.log(body); // Debugging: Output the page content after fetching grades
     let gradesCountCorrect = body.includes(
       "<li>English (5.50)</li><li>Math (4.50)</li><li>Programming Basics (6.00)</li>"
     );
-    console.log('Grades Count Correct:', gradesCountCorrect); // Debugging: Check if the grades count is correct
     assert.ok(gradesCountCorrect, "Add invalid grade should not change the grades count");
   });
 });
